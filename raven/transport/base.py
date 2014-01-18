@@ -53,7 +53,7 @@ class Transport(object):
             path = ''
         project = path_bits[-1]
 
-        if not all([netloc, project, url.username, url.password]):
+        if not all([netloc, project, url.username]):
             raise ValueError('Invalid Sentry DSN: %r' % url.geturl())
 
         server = '%s://%s%s/api/%s/store/' % (
