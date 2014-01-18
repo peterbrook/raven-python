@@ -364,7 +364,6 @@ class Client(object):
             data['extra'][k] = self.transform(v)
 
         # It's important date is added **after** we serialize
-        data.setdefault('project', self.project)
         data.setdefault('timestamp', date or datetime.utcnow())
         data.setdefault('time_spent', time_spent)
         data.setdefault('event_id', event_id)
