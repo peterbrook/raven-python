@@ -179,6 +179,7 @@ class Client(object):
             context = {'sys.argv': sys.argv[:]}
         self.extra = context
         self.tags = o.get('tags') or {}
+        self.headers = o.get('headers') or {}
 
         self.module_cache = ModuleProxyCache()
 
@@ -586,6 +587,7 @@ class Client(object):
                 'X-Sentry-Auth': auth_header,
                 'Content-Type': 'application/octet-stream',
             }
+            headers.update(self.headers)
 
             self.send_remote(url=url, data=message, headers=headers)
 
