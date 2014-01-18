@@ -73,7 +73,12 @@ class Serializer(object):
 
             # if all else fails, lets use the repr of the object
             try:
-                return repr(value)
+                try:
+                    return repr(value)
+                except TypeError as e:
+                    typ = type(value)
+                    logger.error("Type {0} has an invalid __repr__ method".format(typ),exc_info=True)
+                    return six.text_type(typ)
             except Exception as e:
                 logger.exception(e)
                 # It's common case that a model's __unicode__ definition may try to query the database
